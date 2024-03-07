@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/userSchema");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 router.get("/", (req, res) => {
   res.send("Home page");
@@ -32,19 +34,34 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   try {
+    let token;
     const { email, password } = req.body;
 
     if (!email || !password) {
-      return res.status(400).json({ error: "plz filled the data" });
+      return res.status(400).json({ error: "please filled the data" });
     }
 
     const userLogin = await User.findOne({ email: email });
-    console.log(userLogin);
 
-    if (!userLogin) {
-      res.status(400).json({ error: "user error" });
+    if (userLogin) {
+      const isMatch = await bcrypt.compare(password, userLogin.password);
+
+      n = await userLogin.generateAuthToken();
+      // cotokensole.log(token);
+
+      res.cookie("jwtoken",token, {
+        expires: new Date(Date.now() + 25892000000),
+        httpOnly:true
+      });
+
+      if (!isMatch) {
+        res.status(400).json({ error: "Invalid Credential" });
+      } else {
+        res.json({ message: "user login successfully" });
+      }
+      
     } else {
-      res.json({ message: "user login successfully" });
+      res.status(400).json({ error: "Inavalid Credentials" });
     }
   } catch (err) {
     console.log(err);
