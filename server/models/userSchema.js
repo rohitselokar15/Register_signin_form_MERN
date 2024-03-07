@@ -22,7 +22,7 @@ const userSchema= new mongoose.Schema({
         type:String,
         required:true
     }
-})
+})    
 
 // hashing the password
 userSchema.pre('save', async function(next){
