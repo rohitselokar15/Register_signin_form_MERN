@@ -12,7 +12,7 @@ const Login = () => {
             <div className="my-2">
               <label className="text-[15px]">Username or email address :</label>
               <br />
-              <input
+              <input 
                 type="email"
                 className="border w-full pl-2 rounded-md py-1 my-2"
                 placeholder="Enter email"

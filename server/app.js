@@ -1,8 +1,11 @@
 const express = require("express");
 const { use } = require("./router/auth");
+const cors = require("cors");
+
 
 const app = express();
 const port = 3000;
+app.use(cors());
 
 require("./db/connection");
 

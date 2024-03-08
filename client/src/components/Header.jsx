@@ -11,7 +11,7 @@ const Header = () => {
   return (
     <nav className=" font-semibold shadow-xl flex justify-between px-3 h-16 items-center relative">
       <div>
-        <p className="cursor-pointer">Logo</p>
+        <p className="cursor-pointer">Rohit Selokar</p>
       </div>
 
       {/* Hamburger Button for Small and Medium Devices */}

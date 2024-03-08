@@ -9,9 +9,9 @@ router.get("/", (req, res) => {
 });
 
 router.post("/register", async (req, res) => {
-  const { name, email, phone, work, password, cpassword } = req.body;
+  const { name, email, phone, password, cpassword } = req.body;
 
-  if (!name || !email || !phone || !work || !password || !cpassword) {
+  if (!name || !email || !phone || !password || !cpassword) {
     return res.status(422).json({ error: "Fill all the field properly" });
   }
 
@@ -23,7 +23,7 @@ router.post("/register", async (req, res) => {
     } else if (password != cpassword) {
       return res.status(422).json({ error: "password are not matching" });
     } else {
-      const user = new User({ name, email, phone, work, password, cpassword });
+      const user = new User({ name, email, phone, password, cpassword });
       await user.save();
       res.status(201).json({ message: "user registered successfully" });
     }
@@ -47,7 +47,6 @@ router.post("/login", async (req, res) => {
       const isMatch = await bcrypt.compare(password, userLogin.password);
 
       n = await userLogin.generateAuthToken();
-      // cotokensole.log(token);
 
       res.cookie("jwtoken",token, {
         expires: new Date(Date.now() + 25892000000),
