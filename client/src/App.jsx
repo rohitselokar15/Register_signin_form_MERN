@@ -11,7 +11,7 @@ import Error from "./pages/Error";
 
 const App = () => {
   return (
-    <>
+    <div>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -22,7 +22,7 @@ const App = () => {
         <Route path="/error" element={<Error/>}/>
       </Routes>
       {/* <Footer/> */}
-    </>
+    </div>
   );
 };
 
